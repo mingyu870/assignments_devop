@@ -126,7 +126,7 @@ module "private_vpc_endpoint" {
   region              = var.aws_region
 }
 
-/* ##############################
+##############################
 # database
 ##############################
 
@@ -165,7 +165,7 @@ output "mysql" {
 output "mysql_pwd" {
   value     = module.mysql.rds.master_password
   sensitive = true
-} */
+}
 
 ##############################
 # redis
