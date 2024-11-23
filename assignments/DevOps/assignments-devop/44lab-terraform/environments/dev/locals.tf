@@ -35,6 +35,35 @@ locals {
       }
     }
   }
+# EC2-2 spec setup
+  pmm_spec = {
+    instance_type      = "m5.large"
+    ami                = "ami-0b56e8c4b84e2223a" 
+    exclude_subnet_azs = []
+    ingress_rules = {
+      office_wifi_http = {
+        description = "monitor 8080"
+        from_port   = 8080
+        to_port     = 8080
+        protocol    = "tcp"
+        cidr_ipv4   = "0.0.0.0/32"
+        # if you need
+        referenced_security_group_id = null
+        cidr_ipv6                    = null
+      }
+        office_wifi_https = {
+        description = "monitor 443"
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        cidr_ipv4   = "0.0.0.0/32"
+        # if you need
+        referenced_security_group_id = null
+        cidr_ipv6                    = null
+      }
+    }
+  }
+
 
   redis_instance = {
     #     node_type = "cache.m6g.large"

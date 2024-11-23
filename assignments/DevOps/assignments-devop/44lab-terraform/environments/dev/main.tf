@@ -208,13 +208,23 @@ module "ec2_bastion" {
   full_proj_name          = local.full_proj_name
 }
 
-output "ec2_bastion" {
-  value = {
-    public_ip     = module.ec2_bastion.ec2.public_ip
-    public_dns    = module.ec2_bastion.ec2.public_dns
-    pem_filepath  = module.ec2_bastion.key_pair_file_path.filename
-    instance_type = module.ec2_bastion.ec2.instance_type
-  }
+##############################
+# ec2 instance - 2
+##############################
+module "ec2_pmm" {
+  source                  = "../../modules/ec2-instance-2"
+  module_name             = "pmm"
+  instance_type           = local.pmm_spec.instance_type
+  ami                     = local.pmm_spec.ami
+  ingress_rules           = local.pmm_spec.ingress_rules
+  exclude_subnet_azs      = local.pmm_spec.exclude_subnet_azs
+  vpc_id                  = module.network.vpc.id
+  public_subnet           = module.network.public_subnet
+  project_name            = var.project_name
+  env                     = var.environment
+  full_proj_name          = local.full_proj_name
+  route53_domain_zone_id  = module.route53.domain.zone_id
+  sub_domain              = "pmm"
 }
 
 ##############################
