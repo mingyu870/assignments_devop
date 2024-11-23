@@ -27,6 +27,9 @@ DevOps/
 │   └── docker-compose.yml
 └── .github/
     └── workflows/
+        ├── argo.notification-deploy.yaml
+        ├── argo.post-deploy.yaml
+        ├── argo.user-deploy.yaml
         ├── notification-deploy.yaml
         ├── post-deploy.yaml
         └── user-deploy.yaml
